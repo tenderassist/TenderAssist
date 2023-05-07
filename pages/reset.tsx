@@ -38,7 +38,7 @@ const ResetPage: NextPage = () => {
   return (
     <div>
       <h1>"TenderAssist"</h1>
-      <nav>
+      <nav suppressHydrationWarning={true}>
         <ul>
           <Link href={"admin_home"}>
             <li>
