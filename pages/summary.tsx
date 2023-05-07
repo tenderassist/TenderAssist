@@ -46,45 +46,45 @@ const SummaryOfficePage: NextPage = () => {
       <div name="middle">
         <h1>"TenderAssist"</h1>
       </div>
-      <nav suppressHydrationWarning={true}>
+      <nav >
         <ul>
           <Link href={"user_home"}>
             <li>
-              <a>Home</a>
+              <div name="a">Home</div>
             </li>
           </Link>
 
           <Link href={"boxout"}>
             <li>
-              <a>Boxes Out</a>
+              <div name="a">Boxes Out</div>
             </li>
           </Link>
 
           <Link href={"boxin"}>
             <li>
-              <a>Boxes In</a>
+              <div name="a">Boxes In</div>
             </li>
           </Link>
 
           <Link href={"searchbox"}>
             <li>
-              <a>Search Boxes/Specials</a>
+              <div name="a">Search Boxes/Specials</div>
             </li>
           </Link>
 
           <Link href={"searchbox"}>
             <li>
-              <a>Office Search</a>
+              <div name="a">Office Search</div>
             </li>
           </Link>
 
           <li>
-            <a class="active">Office Summary</a>
+            <div name="a" class="active">Office Summary</div>
           </li>
 
           <Link href={"checkoutstanding"}>
             <li>
-              <a>Check Outstanding</a>
+              <div name="a">Check Outstanding</div>
             </li>
           </Link>
         </ul>

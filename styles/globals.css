@@ -96,11 +96,11 @@ ul {
   );
 }
 
-nav li {
+nav li{
   float: left;
 }
 
-nav li a {
+nav li div[name="a"] {
   display: block;
   color: white;
   text-align: center;
@@ -109,7 +109,7 @@ nav li a {
 }
 
 /* Change the link color on hover */
-nav li a:hover {
+nav li div[name="a"]:hover {
   background-color: #1f79ff;
 }
 

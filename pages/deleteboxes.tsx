@@ -58,39 +58,39 @@ const DeleteBoxesPage: NextPage = () => {
       <div name="middle">
         <h1>"TenderAssist"</h1>
       </div>
-      <nav suppressHydrationWarning={true}>
+      <nav>
         <ul>
           <Link href={"admin_home"}>
             <li>
-              <a>Home</a>
+              <div name="a">Home</div>
             </li>
           </Link>
 
           <Link href={"addboxes"}>
             <li>
-              <a>Add Boxes/Specials</a>
+              <div name="a">Add Boxes/Specials</div>
             </li>
           </Link>
 
           <li>
-            <a class="active">Delete Boxes/Specials</a>
+            <div name="a" class="active">Delete Boxes/Specials</div>
           </li>
 
           <Link href={"addoffices"}>
             <li>
-              <a>Add Offices</a>
+              <div name="a">Add Offices</div>
             </li>
           </Link>
 
           <Link href={"updateoffices"}>
             <li>
-              <a>Update Offices</a>
+              <div name="a">Update Offices</div>
             </li>
           </Link>
 
           <Link href={"user_home"}>
             <li>
-              <a>Switch to User Mode</a>
+              <div name="a">Switch to User Mode</div>
             </li>
           </Link>
         </ul>
