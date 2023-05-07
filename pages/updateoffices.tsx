@@ -40,8 +40,6 @@ const UpdateOfficePage: NextPage = () => {
       "Successfuly added " + offcompgiven + " to office " + offnumgiven;
     document.getElementById("offnumupdate").value = "";
     document.getElementById("offcompupdate").value = "";
-
-    window.location.reload;
   }
 
   return (
@@ -49,7 +47,7 @@ const UpdateOfficePage: NextPage = () => {
       <div name="middle">
         <h1>"TenderAssist"</h1>
       </div>
-      <nav>
+      <nav suppressHydrationWarning={true}>
         <ul>
           <Link href={"admin_home"}>
             <li>

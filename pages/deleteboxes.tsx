@@ -50,7 +50,6 @@ const DeleteBoxesPage: NextPage = () => {
           "Successfully deleted special " + boxspecdelnum.value;
       }
       document.getElementById("boxspecdelnum").value = "";
-      window.location.reload;
     }
   }
 
@@ -59,7 +58,7 @@ const DeleteBoxesPage: NextPage = () => {
       <div name="middle">
         <h1>"TenderAssist"</h1>
       </div>
-      <nav>
+      <nav suppressHydrationWarning={true}>
         <ul>
           <Link href={"admin_home"}>
             <li>

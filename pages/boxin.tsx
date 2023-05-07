@@ -266,7 +266,7 @@ const BoxInPage: NextPage = () => {
       <div name="middle">
         <h1>"TenderAssist"</h1>
       </div>
-      <nav>
+      <nav suppressHydrationWarning={true}>
         <ul>
           <Link href={"user_home"}>
             <li>

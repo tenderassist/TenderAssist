@@ -10,7 +10,7 @@ const UserHome: NextPage = () => {
       <div name="middle">
         <h1>"TenderAssist"</h1>
       </div>
-      <nav>
+      <nav suppressHydrationWarning={true}>
         <ul>
           <li>
             <a class="active">Home</a>
