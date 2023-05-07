@@ -9,39 +9,39 @@ const AdminHome: NextPage = () => {
       <div id="middle">
         <h1>"TenderAssist"</h1>
       </div>
-      <nav suppressHydrationWarning={true}>
+      <nav>
         <ul>
           <li>
-            <a class="active">Home</a>
+            <div name="a" class="active">Home</div>
           </li>
 
           <Link href={"addboxes"}>
             <li>
-              <a>Add Boxes/Specials</a>
+              <div name="a">Add Boxes/Specials</div>
             </li>
           </Link>
 
           <Link href={"deleteboxes"}>
             <li>
-              <a>Delete Boxes/Specials</a>
+              <div name="a">Delete Boxes/Specials</div>
             </li>
           </Link>
 
           <Link href={"addoffices"}>
             <li>
-              <a>Add Offices</a>
+              <div name="a">Add Offices</div>
             </li>
           </Link>
 
           <Link href={"updateoffices"}>
             <li>
-              <a>Update Offices</a>
+              <div name="a">Update Offices</div>
             </li>
           </Link>
 
           <Link href={"user_home"}>
             <li>
-              <a>Switch to User Mode</a>
+              <div name="a">Switch to User Mode</div>
             </li>
           </Link>
         </ul>
