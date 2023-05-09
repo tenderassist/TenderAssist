@@ -1,18 +1,18 @@
-import type { NextPage } from "next";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import styles from "../styles/Home.module.css";
-import { useState, useEffect } from "react";
-import { ListResult } from "pocketbase";
-const PocketBase = require("pocketbase/cjs");
-const pb = new PocketBase("https://tenderassist.pockethost.io");
+import type { NextPage } from 'next';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import styles from '../styles/Home.module.css';
+import { useState, useEffect } from 'react';
+import { ListResult } from 'pocketbase';
+const PocketBase = require('pocketbase/cjs');
+const pb = new PocketBase('https://tenderassist.pockethost.io');
 pb.autoCancellation(false);
 
 const BoxInPage: NextPage = () => {
   //Enter Button
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
 
-  const handleKeyPress = (event) => {
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.keyCode === 13) {
       // Call your function here
       BoxCheckIn();
@@ -30,38 +30,38 @@ const BoxInPage: NextPage = () => {
     const specialin2val = specialin2.value;
 
     //-----------------------------------------------------------------------
-    document.getElementById("boxinreturn").innerHTML =
-      "Office: " +
+    document.getElementById('boxinreturn').innerHTML =
+      'Office: ' +
       boxinoffidval +
-      "; Checked in Boxes: (" +
+      '; Checked in Boxes: (' +
       boxin1val +
-      ") (" +
+      ') (' +
       boxin2val +
-      ") (" +
+      ') (' +
       boxin3val +
-      "); " +
-      "Specials: (" +
+      '); ' +
+      'Specials: (' +
       specialin1val +
-      ") (" +
+      ') (' +
       specialin2val +
-      ")";
+      ')';
 
-    document.getElementById("boxinoffid").value = "";
-    document.getElementById("boxin1").value = "";
-    document.getElementById("boxin2").value = "";
-    document.getElementById("boxin3").value = "";
-    document.getElementById("specialin1").value = "";
-    document.getElementById("specialin2").value = "";
+    document.getElementById('boxinoffid').value = '';
+    document.getElementById('boxin1').value = '';
+    document.getElementById('boxin2').value = '';
+    document.getElementById('boxin3').value = '';
+    document.getElementById('specialin1').value = '';
+    document.getElementById('specialin2').value = '';
 
     //------------------------------------------------------------
 
     const nidate = new Date();
     const datein = nidate.getTime();
     const indisplay =
-      nidate.getHours() + ":" + nidate.getMinutes() + ":" + nidate.getSeconds();
-    const offin = "officenum= " + boxinoffidval;
+      nidate.getHours() + ':' + nidate.getMinutes() + ':' + nidate.getSeconds();
+    const offin = 'officenum= ' + boxinoffidval;
 
-    var offrecord = await pb.collection("offices").getFirstListItem(offin);
+    var offrecord = await pb.collection('offices').getFirstListItem(offin);
     const offrecordid = offrecord.id;
     const officeIDData = boxinoffidval;
     var offb1in = offrecord.offbox1;
@@ -74,12 +74,12 @@ const BoxInPage: NextPage = () => {
     var offs3in = offrecord.offspec3;
 
     // BOXES ----------------------------------------------------------------
-    if (boxin1val != "") {
-      const box1 = "boxnum= " + boxin1val;
-      const box1record = await pb.collection("boxes").getFirstListItem(box1);
+    if (boxin1val != '') {
+      const box1 = 'boxnum= ' + boxin1val;
+      const box1record = await pb.collection('boxes').getFirstListItem(box1);
       const boxID1Data = box1record.id;
 
-      pb.collection("boxes").update(boxID1Data, {
+      pb.collection('boxes').update(boxID1Data, {
         boxlastcheckin: datein,
         boxlastindisplay: indisplay,
         boxlastoffice: officeIDData,
@@ -88,12 +88,12 @@ const BoxInPage: NextPage = () => {
     }
 
     //-----------------------------------------------------------------------
-    if (boxin2val != "") {
-      const box2 = "boxnum= " + boxin2val;
-      const box2record = await pb.collection("boxes").getFirstListItem(box2);
+    if (boxin2val != '') {
+      const box2 = 'boxnum= ' + boxin2val;
+      const box2record = await pb.collection('boxes').getFirstListItem(box2);
       const boxID2Data = box2record.id;
 
-      pb.collection("boxes").update(boxID2Data, {
+      pb.collection('boxes').update(boxID2Data, {
         boxlastcheckin: datein,
         boxlastindisplay: indisplay,
         boxlastoffice: officeIDData,
@@ -102,12 +102,12 @@ const BoxInPage: NextPage = () => {
     }
 
     //-----------------------------------------------------------------------
-    if (boxin3val != "") {
-      const box3 = "boxnum= " + boxin3val;
-      const box3record = await pb.collection("boxes").getFirstListItem(box3);
+    if (boxin3val != '') {
+      const box3 = 'boxnum= ' + boxin3val;
+      const box3record = await pb.collection('boxes').getFirstListItem(box3);
       const boxID3Data = box3record.id;
 
-      pb.collection("boxes").update(boxID3Data, {
+      pb.collection('boxes').update(boxID3Data, {
         boxlastcheckin: datein,
         boxlastindisplay: indisplay,
         boxlastoffice: officeIDData,
@@ -116,14 +116,14 @@ const BoxInPage: NextPage = () => {
     }
 
     // SPECIALS -----------------------------------------------------------------------
-    if (specialin1val != "") {
-      const spec1 = "specialnum= " + specialin1val;
+    if (specialin1val != '') {
+      const spec1 = 'specialnum= ' + specialin1val;
       const spec1record = await pb
-        .collection("specials")
+        .collection('specials')
         .getFirstListItem(spec1);
       const specID1Data = spec1record.id;
 
-      pb.collection("specials").update(specID1Data, {
+      pb.collection('specials').update(specID1Data, {
         speciallastcheckin: datein,
         speciallastindisplay: indisplay,
         speciallastoffice: officeIDData,
@@ -132,14 +132,14 @@ const BoxInPage: NextPage = () => {
     }
 
     //-----------------------------------------------------------------------
-    if (specialin2val != "") {
-      const spec2 = "specialnum= " + specialin2val;
+    if (specialin2val != '') {
+      const spec2 = 'specialnum= ' + specialin2val;
       const spec2record = await pb
-        .collection("specials")
+        .collection('specials')
         .getFirstListItem(spec2);
       const specID2Data = spec2record.id;
 
-      pb.collection("specials").update(specID2Data, {
+      pb.collection('specials').update(specID2Data, {
         speciallastcheckin: datein,
         speciallastindisplay: indisplay,
         speciallastoffice: officeIDData,
@@ -149,27 +149,27 @@ const BoxInPage: NextPage = () => {
 
     //Office Boxes-----------------------------------------------------------------------
     if (boxin1val == offb1in) {
-      pb.collection("offices").update(offrecordid, {
-        offbox1: "",
+      pb.collection('offices').update(offrecordid, {
+        offbox1: '',
       });
     } else if (boxin1val == offb2in) {
-      pb.collection("offices").update(offrecordid, {
-        offbox2: "",
+      pb.collection('offices').update(offrecordid, {
+        offbox2: '',
       });
     } else if (boxin1val == offb3in) {
-      pb.collection("offices").update(offrecordid, {
-        offbox3: "",
+      pb.collection('offices').update(offrecordid, {
+        offbox3: '',
       });
     } else if (boxin1val == offb4in) {
-      pb.collection("offices").update(offrecordid, {
-        offbox4: "",
+      pb.collection('offices').update(offrecordid, {
+        offbox4: '',
       });
     } else if (boxin1val == offb5in) {
-      pb.collection("offices").update(offrecordid, {
-        offbox5: "",
+      pb.collection('offices').update(offrecordid, {
+        offbox5: '',
       });
     }
-    offrecord = await pb.collection("offices").getFirstListItem(offin);
+    offrecord = await pb.collection('offices').getFirstListItem(offin);
     offb1in = offrecord.offbox1;
     offb2in = offrecord.offbox2;
     offb3in = offrecord.offbox3;
@@ -177,27 +177,27 @@ const BoxInPage: NextPage = () => {
     offb5in = offrecord.offbox5;
 
     if (boxin2val == offb1in) {
-      pb.collection("offices").update(offrecordid, {
-        offbox1: "",
+      pb.collection('offices').update(offrecordid, {
+        offbox1: '',
       });
     } else if (boxin2val == offb2in) {
-      pb.collection("offices").update(offrecordid, {
-        offbox2: "",
+      pb.collection('offices').update(offrecordid, {
+        offbox2: '',
       });
     } else if (boxin2val == offb3in) {
-      pb.collection("offices").update(offrecordid, {
-        offbox3: "",
+      pb.collection('offices').update(offrecordid, {
+        offbox3: '',
       });
     } else if (boxin2val == offb4in) {
-      pb.collection("offices").update(offrecordid, {
-        offbox4: "",
+      pb.collection('offices').update(offrecordid, {
+        offbox4: '',
       });
     } else if (boxin2val == offb5in) {
-      pb.collection("offices").update(offrecordid, {
-        offbox5: "",
+      pb.collection('offices').update(offrecordid, {
+        offbox5: '',
       });
     }
-    offrecord = await pb.collection("offices").getFirstListItem(offin);
+    offrecord = await pb.collection('offices').getFirstListItem(offin);
     offb1in = offrecord.offbox1;
     offb2in = offrecord.offbox2;
     offb3in = offrecord.offbox3;
@@ -205,56 +205,56 @@ const BoxInPage: NextPage = () => {
     offb5in = offrecord.offbox5;
 
     if (boxin3val == offb1in) {
-      pb.collection("offices").update(offrecordid, {
-        offbox1: "",
+      pb.collection('offices').update(offrecordid, {
+        offbox1: '',
       });
     } else if (boxin3val == offb2in) {
-      pb.collection("offices").update(offrecordid, {
-        offbox2: "",
+      pb.collection('offices').update(offrecordid, {
+        offbox2: '',
       });
     } else if (boxin3val == offb3in) {
-      pb.collection("offices").update(offrecordid, {
-        offbox3: "",
+      pb.collection('offices').update(offrecordid, {
+        offbox3: '',
       });
     } else if (boxin3val == offb4in) {
-      pb.collection("offices").update(offrecordid, {
-        offbox4: "",
+      pb.collection('offices').update(offrecordid, {
+        offbox4: '',
       });
     } else if (boxin3val == offb5in) {
-      pb.collection("offices").update(offrecordid, {
-        offbox5: "",
+      pb.collection('offices').update(offrecordid, {
+        offbox5: '',
       });
     }
     //Office Specials-----------------------------------------------------------------------
     if (specialin1val == offs1in) {
-      pb.collection("offices").update(offrecordid, {
-        offspec1: "",
+      pb.collection('offices').update(offrecordid, {
+        offspec1: '',
       });
     } else if (specialin1val == offs2in) {
-      pb.collection("offices").update(offrecordid, {
-        offspec2: "",
+      pb.collection('offices').update(offrecordid, {
+        offspec2: '',
       });
     } else if (specialin1val == offs3in) {
-      pb.collection("offices").update(offrecordid, {
-        offspec3: "",
+      pb.collection('offices').update(offrecordid, {
+        offspec3: '',
       });
     }
-    offrecord = await pb.collection("offices").getFirstListItem(offin);
+    offrecord = await pb.collection('offices').getFirstListItem(offin);
     var offs1in = offrecord.offspec1;
     var offs2in = offrecord.offspec2;
     var offs3in = offrecord.offspec3;
 
     if (specialin2val == offs1in) {
-      pb.collection("offices").update(offrecordid, {
-        offspec1: "",
+      pb.collection('offices').update(offrecordid, {
+        offspec1: '',
       });
     } else if (specialin2val == offs2in) {
-      pb.collection("offices").update(offrecordid, {
-        offspec2: "",
+      pb.collection('offices').update(offrecordid, {
+        offspec2: '',
       });
     } else if (specialin2val == offs3in) {
-      pb.collection("offices").update(offrecordid, {
-        offspec3: "",
+      pb.collection('offices').update(offrecordid, {
+        offspec3: '',
       });
     }
 
@@ -263,65 +263,65 @@ const BoxInPage: NextPage = () => {
 
   return (
     <div>
-      <div name="middle">
-        <h1>"TenderAssist"</h1>
+      <div name='middle'>
+        <h1>&quot;TenderAssist&quot;</h1>
       </div>
       <nav>
         <ul>
-          <Link href={"user_home"}>
+          <Link href={'user_home'}>
             <li>
-              <div name="a">Home</div>
+              <div name='a'>Home</div>
             </li>
           </Link>
 
-          <Link href={"boxout"}>
+          <Link href={'boxout'}>
             <li>
-              <div name="a">Boxes Out</div>
+              <div name='a'>Boxes Out</div>
             </li>
           </Link>
 
           <li>
-            <div name="a" class="active">Boxes In</div>
+            <div name='a' class='active'>Boxes In</div>
           </li>
 
-          <Link href={"searchbox"}>
+          <Link href={'searchbox'}>
             <li>
-              <div name="a">Search Boxes/Specials</div>
+              <div name='a'>Search Boxes/Specials</div>
             </li>
           </Link>
 
-          <Link href={"searchoffice"}>
+          <Link href={'searchoffice'}>
             <li>
-              <div name="a">Office Search</div>
+              <div name='a'>Office Search</div>
             </li>
           </Link>
 
-          <Link href={"summary"}>
+          <Link href={'summary'}>
             <li>
-              <div name="a">Office Summary</div>
+              <div name='a'>Office Summary</div>
             </li>
           </Link>
 
-          <Link href={"checkoutstanding"}>
+          <Link href={'checkoutstanding'}>
             <li>
-              <div name="a">Check Outstanding</div>
+              <div name='a'>Check Outstanding</div>
             </li>
           </Link>
         </ul>
       </nav>
 
-      <div name="middle">
+      <div name='middle'>
         <h2>Boxes/Specials Coming In</h2>
         <p>Please fill in the information below</p>
         <br />
         <label>Temp Booking In: </label>
-        <input type="text" id="tempnamein" placeholder="E.g. Mathew" />
+        <input type='text' id='tempnamein' placeholder='E.g. Mathew' />
         <br />
         <label>Office Number: </label>
         <input
-          id="boxinoffid"
-          name="boxinoffid"
-          placeholder="E.g. '2'"
+          id='boxinoffid'
+          name='boxinoffid'
+          placeholder='E.g. 2'
           required
         />
         <br />
@@ -329,8 +329,8 @@ const BoxInPage: NextPage = () => {
         <p>BOXES:</p>
         <label>Box 1: </label>
         <input
-          id="boxin1"
-          name="boxin1"
+          id='boxin1'
+          name='boxin1'
           onChange={(event) => setValue(event.target.value)}
           onKeyDown={handleKeyPress}
         />
@@ -338,8 +338,8 @@ const BoxInPage: NextPage = () => {
 
         <label>Box 2: </label>
         <input
-          id="boxin2"
-          name="boxin2"
+          id='boxin2'
+          name='boxin2'
           onChange={(event) => setValue(event.target.value)}
           onKeyDown={handleKeyPress}
         />
@@ -347,8 +347,8 @@ const BoxInPage: NextPage = () => {
 
         <label>Box 3: </label>
         <input
-          id="boxin3"
-          name="boxin3"
+          id='boxin3'
+          name='boxin3'
           onChange={(event) => setValue(event.target.value)}
           onKeyDown={handleKeyPress}
         />
@@ -358,8 +358,8 @@ const BoxInPage: NextPage = () => {
         <p>SPECIALS:</p>
         <label>Special 1: </label>
         <input
-          id="specialin1"
-          name="specialin1"
+          id='specialin1'
+          name='specialin1'
           onChange={(event) => setValue(event.target.value)}
           onKeyDown={handleKeyPress}
         />
@@ -367,16 +367,16 @@ const BoxInPage: NextPage = () => {
 
         <label>Special 2: </label>
         <input
-          id="specialin2"
-          name="specialin2"
+          id='specialin2'
+          name='specialin2'
           onChange={(event) => setValue(event.target.value)}
           onKeyDown={handleKeyPress}
         />
         <br />
 
-        <p name="feedback" id="boxinreturn"></p>
+        <p name='feedback' id='boxinreturn'></p>
 
-        <button id="btnBoxIn" onClick={BoxCheckIn}>
+        <button id='btnBoxIn' onClick={BoxCheckIn}>
           Check In
         </button>
       </div>
