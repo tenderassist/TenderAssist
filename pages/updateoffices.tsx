@@ -23,7 +23,8 @@ const UpdateOfficePage: NextPage = () => {
     const offnumgiven = offnumupdate.value;
     const offcompgiven = offcompupdate.value;
     const searchoffnum = 'officenum= ' + offnumupdate.value;
-
+    
+    try{
     const officerecord = await pb
       .collection('offices')
       .getFirstListItem(searchoffnum);
@@ -33,11 +34,15 @@ const UpdateOfficePage: NextPage = () => {
       officenum: offnumgiven,
       officecompany: offcompgiven,
     };
-
-    pb.collection('offices').update(offid, updateofficedata);
+    
+     pb.collection('offices').update(offid, updateofficedata);
 
     document.getElementById('updateofficereturn').innerHTML =
       'Successfuly added ' + offcompgiven + ' to office ' + offnumgiven;
+    } catch (error) {
+      window.alert("ERROR: Office not found! Please enter a valid office number.")
+    }  
+   
     document.getElementById('offnumupdate').value = '';
     document.getElementById('offcompupdate').value = '';
   }

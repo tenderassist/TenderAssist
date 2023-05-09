@@ -10,6 +10,7 @@ pb.autoCancellation(false);
 
 const CheckOutstandingPage: NextPage = () => {
   async function OutstandingBoxSpecial() {
+    try{
     const date = new Date();
     const datecheck = date.getTime();
     const dateadded = datecheck + 2500000;
@@ -41,6 +42,9 @@ const CheckOutstandingPage: NextPage = () => {
       outstandingSpecialNumData +
       '; Office: ' +
       outstandingSpecialOffData;
+    } catch (error){
+      window.alert("No outstanding boxes/specials found!");
+    }
   }
 
   return (

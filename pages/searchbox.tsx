@@ -25,6 +25,8 @@ const SearchBoxPage: NextPage = () => {
     //---------------------------------------------------------------------
     if (typetosearch == 'searchbox') {
       const boxsearchnum = 'boxnum= ' + boxnumsearch.value;
+      
+      try {
       const boxrecord = await pb
         .collection('boxes')
         .getFirstListItem(boxsearchnum);
@@ -48,11 +50,15 @@ const SearchBoxPage: NextPage = () => {
         boxInData +
         ']; Checked in by: ' +
         boxTempInData;
+    } catch(error){
+      window.alert("ERROR: Could not find the box! Please ensure the box number is entered correctly.");
+    }
     }
     //--------------------------------------------------------------------------
     if (typetosearch == 'searchspecial') {
       const specsearchnum = 'specialnum= ' + boxnumsearch.value;
-
+      
+      try{
       const specrecord = await pb
         .collection('specials')
         .getFirstListItem(specsearchnum);
@@ -76,6 +82,9 @@ const SearchBoxPage: NextPage = () => {
         specInData +
         ']; Checked in by: ' +
         specTempInData;
+      } catch(error){
+        window.alert("ERROR: Could not find the Special! Please ensure the special number is entered correctly.");
+      }
     }
     //--------------------------------------------------------------------------
     document.getElementById('boxnumsearch').value = '';
