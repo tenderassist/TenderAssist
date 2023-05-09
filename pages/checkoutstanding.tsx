@@ -1,11 +1,11 @@
-import type { NextPage } from "next";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import styles from "../styles/Home.module.css";
-import { useState, useEffect } from "react";
-import { ListResult } from "pocketbase";
-const PocketBase = require("pocketbase/cjs");
-const pb = new PocketBase("https://tenderassist.pockethost.io");
+import type { NextPage } from 'next';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import styles from '../styles/Home.module.css';
+import { useState, useEffect } from 'react';
+import { ListResult } from 'pocketbase';
+const PocketBase = require('pocketbase/cjs');
+const pb = new PocketBase('https://tenderassist.pockethost.io');
 pb.autoCancellation(false);
 
 const CheckOutstandingPage: NextPage = () => {
@@ -14,99 +14,99 @@ const CheckOutstandingPage: NextPage = () => {
     const datecheck = date.getTime();
     const dateadded = datecheck + 2500000;
     const searchparamBox =
-      "boxlastcheckout > boxlastcheckin && boxlastcheckin <= " + dateadded;
+      'boxlastcheckout > boxlastcheckin && boxlastcheckin <= ' + dateadded;
 
     const boxresultList = await pb
-      .collection("boxes")
+      .collection('boxes')
       .getFirstListItem(searchparamBox);
 
     const outstandingBoxNumData = boxresultList.boxnum;
     const outstandingBoxOffData = boxresultList.boxlastoffice;
 
-    document.getElementById("outstandingboxreturn").innerHTML =
-      "Box: " + outstandingBoxNumData + "; Office: " + outstandingBoxOffData;
+    document.getElementById('outstandingboxreturn').innerHTML =
+      'Box: ' + outstandingBoxNumData + '; Office: ' + outstandingBoxOffData;
 
     const searchparamSpec =
-      "speciallastcheckout > speciallastcheckin && speciallastcheckout <= " +
+      'speciallastcheckout > speciallastcheckin && speciallastcheckout <= ' +
       dateadded;
     const specialresultList = await pb
-      .collection("specials")
+      .collection('specials')
       .getFirstListItem(searchparamSpec);
 
     const outstandingSpecialNumData = specialresultList.specialnum;
     const outstandingSpecialOffData = specialresultList.speciallastoffice;
 
-    document.getElementById("outstandingspecreturn").innerHTML =
-      "Special: " +
+    document.getElementById('outstandingspecreturn').innerHTML =
+      'Special: ' +
       outstandingSpecialNumData +
-      "; Office: " +
+      '; Office: ' +
       outstandingSpecialOffData;
   }
 
   return (
     <div>
-      <div name="middle">
-        <h1>"TenderAssist"</h1>
+      <div name='middle'>
+        <h1>&quot;TenderAssist&quot;</h1>
       </div>
       <nav>
         <ul>
-          <Link href={"user_home"}>
+          <Link href={'user_home'}>
             <li>
-              <div name="a">Home</div>
+              <div name='a'>Home</div>
             </li>
           </Link>
 
-          <Link href={"boxout"}>
+          <Link href={'boxout'}>
             <li>
-              <div name="a">Boxes Out</div>
+              <div name='a'>Boxes Out</div>
             </li>
           </Link>
 
-          <Link href={"boxin"}>
+          <Link href={'boxin'}>
             <li>
-              <div name="a">Boxes In</div>
+              <div name='a'>Boxes In</div>
             </li>
           </Link>
 
-          <Link href={"searchbox"}>
+          <Link href={'searchbox'}>
             <li>
-              <div name="a">Search Boxes/Specials</div>
+              <div name='a'>Search Boxes/Specials</div>
             </li>
           </Link>
 
-          <Link href={"searchoffice"}>
+          <Link href={'searchoffice'}>
             <li>
-              <div name="a">Office Search</div>
+              <div name='a'>Office Search</div>
             </li>
           </Link>
 
-          <Link href={"summary"}>
+          <Link href={'summary'}>
             <li>
-              <div name="a">Office Summary</div>
+              <div name='a'>Office Summary</div>
             </li>
           </Link>
 
           <li>
-            <div name="a" class="active">Check Outstanding</div>
+            <div name='a' class='active'>Check Outstanding</div>
           </li>
         </ul>
       </nav>
 
-      <div name="middle">
+      <div name='middle'>
         <h2>Check Outstanding Boxes/Specials</h2>
         <p>
           Please click the button below to check if there are any boxes/specials
           that have not been returned yet
         </p>
         <br />
-        <p>Outstanding box: E.g. "(Box number) Office number": </p>
-        <p name="feedback" id="outstandingboxreturn"></p>
+        <p>Outstanding box: E.g. &quot;(Box number) Office number&quot;: </p>
+        <p name='feedback' id='outstandingboxreturn'></p>
         <br />
-        <p>Outstanding Special: E.g. "(Special number) Office number": </p>
-        <p name="feedback" id="outstandingspecreturn"></p>
+        <p>Outstanding Special: E.g. &quot;(Special number) Office number&quot;: </p>
+        <p name='feedback' id='outstandingspecreturn'></p>
 
         <br />
-        <button id="btnOutstanding" onClick={OutstandingBoxSpecial}>
+        <button id='btnOutstanding' onClick={OutstandingBoxSpecial}>
           Search
         </button>
       </div>

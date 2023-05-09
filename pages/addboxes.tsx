@@ -1,17 +1,17 @@
-import type { NextPage } from "next";
-import styles from "../styles/Home.module.css";
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import { ListResult } from "pocketbase";
-const PocketBase = require("pocketbase/cjs");
-const pb = new PocketBase("https://tenderassist.pockethost.io");
+import type { NextPage } from 'next';
+import styles from '../styles/Home.module.css';
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { ListResult } from 'pocketbase';
+const PocketBase = require('pocketbase/cjs');
+const pb = new PocketBase('https://tenderassist.pockethost.io');
 pb.autoCancellation(false);
 
 const AddBoxesPage: NextPage = () => {
   //Enter Button
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
 
-  const handleKeyPress = (event) => {
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.keyCode === 13) {
       // Call your function here
       AddBoxesnSpec();
@@ -23,75 +23,75 @@ const AddBoxesPage: NextPage = () => {
     const boxorspec = addboxspecial.value;
     const bnsnum = addboxspecnum.value;
 
-    if (boxorspec == "addbox") {
+    if (boxorspec == 'addbox') {
       const data = {
         boxnum: bnsnum,
       };
 
-      const record = await pb.collection("boxes").create(data);
+      const record = await pb.collection('boxes').create(data);
 
-      document.getElementById("addboxreturn").innerHTML =
-        "Successfuly added Box " + bnsnum;
+      document.getElementById('addboxreturn').innerHTML =
+        'Successfuly added Box ' + bnsnum;
     }
 
-    if (boxorspec == "addspecial") {
+    if (boxorspec == 'addspecial') {
       const data = {
         specialnum: bnsnum,
       };
 
-      const record = await pb.collection("specials").create(data);
+      const record = await pb.collection('specials').create(data);
 
-      document.getElementById("addboxreturn").innerHTML =
-        "Successfuly added Special " + bnsnum;
+      document.getElementById('addboxreturn').innerHTML =
+        'Successfuly added Special ' + bnsnum;
     }
 
-    document.getElementById("addboxspecnum").value = "";
+    document.getElementById('addboxspecnum').value = '';
   }
 
   return (
     <div>
-      <div name="middle">
-        <h1>"TenderAssist"</h1>
+      <div name='middle'>
+        <h1>&quot;TenderAssist&quot;</h1>
       </div>
       <nav>
         <ul>
-          <Link href={"admin_home"}>
+          <Link href={'admin_home'}>
             <li>
-              <div name="a">Home</div>
+              <div name='a'>Home</div>
             </li>
           </Link>
 
           <li>
-            <div name="a" class="active">Add Boxes/Specials</div>
+            <div name='a' class='active'>Add Boxes/Specials</div>
           </li>
 
-          <Link href={"deleteboxes"}>
+          <Link href={'deleteboxes'}>
             <li>
-              <div name="a">Delete Boxes/Specials</div>
+              <div name='a'>Delete Boxes/Specials</div>
             </li>
           </Link>
 
-          <Link href={"addoffices"}>
+          <Link href={'addoffices'}>
             <li>
-              <div name="a">Add Offices</div>
+              <div name='a'>Add Offices</div>
             </li>
           </Link>
 
-          <Link href={"updateoffices"}>
+          <Link href={'updateoffices'}>
             <li>
-              <div name="a">Update Offices</div>
+              <div name='a'>Update Offices</div>
             </li>
           </Link>
 
-          <Link href={"user_home"}>
+          <Link href={'user_home'}>
             <li>
-              <div name="a">Switch to User Mode</div>
+              <div name='a'>Switch to User Mode</div>
             </li>
           </Link>
         </ul>
       </nav>
 
-      <div name="middle">
+      <div name='middle'>
         <h2>Add Box/Special</h2>
         <p>
           Please enter the details of the box/special you would like to add
@@ -99,25 +99,25 @@ const AddBoxesPage: NextPage = () => {
         </p>
         <br />
         <label>Type: </label>
-        <select name="addboxspecial" id="addboxspecial">
-          <option value="addbox">Box</option>
-          <option value="addspecial">Special</option>
+        <select name='addboxspecial' id='addboxspecial'>
+          <option value='addbox'>Box</option>
+          <option value='addspecial'>Special</option>
         </select>
         <br />
 
         <label>Box/Special Number: </label>
         <input
-          id="addboxspecnum"
-          name="addboxspecnum"
-          placeholder="E.g. '21'"
+          id='addboxspecnum'
+          name='addboxspecnum'
+          placeholder='E.g. 21'
           onChange={(event) => setValue(event.target.value)}
           onKeyDown={handleKeyPress}
         />
         <br />
 
-        <p name="feedback" id="addboxreturn"></p>
+        <p name='feedback' id='addboxreturn'></p>
 
-        <button id="btnAddBox" onClick={AddBoxesnSpec}>
+        <button id='btnAddBox' onClick={AddBoxesnSpec}>
           Add
         </button>
       </div>
