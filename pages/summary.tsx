@@ -21,6 +21,7 @@ const SummaryOfficePage: NextPage = () => {
   //---------------------------------------------------
 
   async function SummaryOffices() {
+    try{
     const officenum = 'officenum= ' + offidsummary.value;
 
     const officerecord = await pb
@@ -39,6 +40,9 @@ const SummaryOfficePage: NextPage = () => {
       officeBoxData;
 
     document.getElementById('offidsummary').value = '';
+    } catch(error){
+      window.alert("ERROR: Could not find the Office! Please ensure the correct office number is entered.")
+    }
   }
 
   return (

@@ -22,15 +22,19 @@ const AddOfficePage: NextPage = () => {
   async function AddOffice() {
     const offnumgiven = offnumadd.value;
 
-    const editofficedata = {
+ try{
+   const editofficedata = {
       officenum: offnumgiven,
     };
-
+   
     const record = await pb.collection('offices').create(editofficedata);
 
     document.getElementById('addofficereturn').innerHTML =
       'Successfuly added Office ' + offnumgiven;
     document.getElementById('offnumadd').value = '';
+    } catch(error) {
+      window.alert("ERROR: Unable to add office!");
+    }
   }
 
   return (

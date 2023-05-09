@@ -21,6 +21,7 @@ const SearchOfficePage: NextPage = () => {
   //---------------------------------------------------
 
   async function SearchOffices() {
+    try{
     const officenum = 'officenum= ' + offidsearch.value;
 
     const officerecord = await pb
@@ -79,6 +80,9 @@ const SearchOfficePage: NextPage = () => {
       speclist;
 
     document.getElementById('offidsearch').value = '';
+    } catch (error){
+      window.alert("ERROR: Could not find the Office! Please ensure the correct office number is entered.")
+    }
   }
 
   return (

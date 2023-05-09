@@ -28,23 +28,29 @@ const AddBoxesPage: NextPage = () => {
         boxnum: bnsnum,
       };
 
-      const record = await pb.collection('boxes').create(data);
+      try {
+        const record = await pb.collection('boxes').create(data);
 
-      document.getElementById('addboxreturn').innerHTML =
-        'Successfuly added Box ' + bnsnum;
+        document.getElementById('addboxreturn').innerHTML = 'Successfuly added Box ' + bnsnum;
+      } catch (error) {
+        window.alert("ERROR: Unable to add box!");
+  }
     }
 
     if (boxorspec == 'addspecial') {
       const data = {
         specialnum: bnsnum,
       };
-
+      
+      try{
       const record = await pb.collection('specials').create(data);
 
       document.getElementById('addboxreturn').innerHTML =
         'Successfuly added Special ' + bnsnum;
+    } catch (error) {
+      window.alert("ERROR: Unable to add Special!");
     }
-
+    }
     document.getElementById('addboxspecnum').value = '';
   }
 

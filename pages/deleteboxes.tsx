@@ -26,7 +26,8 @@ const DeleteBoxesPage: NextPage = () => {
     if (confirm) {
       if (typechosen == 'deletebox') {
         const delnumberbox = 'boxnum= ' + boxspecdelnum.value;
-
+        
+        try{
         const boxrecord = await pb
           .collection('boxes')
           .getFirstListItem(delnumberbox);
@@ -35,11 +36,15 @@ const DeleteBoxesPage: NextPage = () => {
         pb.collection('boxes').delete(idfordelbox);
         document.getElementById('deleteboxreturn').innerHTML =
           'Successfully deleted box ' + boxspecdelnum.value;
+        }catch (error) {
+          window.alert("ERROR: Box not found!");
+        }
       }
 
       if (typechosen == 'deletespecial') {
         const delnumberspec = 'specialnum= ' + boxspecdelnum.value;
-
+        
+        try{
         const specrecord = await pb
           .collection('specials')
           .getFirstListItem(delnumberspec);
@@ -48,6 +53,9 @@ const DeleteBoxesPage: NextPage = () => {
         pb.collection('specials').delete(idfordelspec);
         document.getElementById('deleteboxreturn').innerHTML =
           'Successfully deleted special ' + boxspecdelnum.value;
+        }catch(error){
+          window.alert("ERROR: Special not found!");
+        }
       }
       document.getElementById('boxspecdelnum').value = '';
     }
