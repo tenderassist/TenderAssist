@@ -61,6 +61,7 @@ const BoxInPage: NextPage = () => {
       nidate.getHours() + ':' + nidate.getMinutes() + ':' + nidate.getSeconds();
     const offin = 'officenum= ' + boxinoffidval;
 
+try{
     var offrecord = await pb.collection('offices').getFirstListItem(offin);
     const offrecordid = offrecord.id;
     const officeIDData = boxinoffidval;
@@ -257,6 +258,10 @@ const BoxInPage: NextPage = () => {
         offspec3: '',
       });
     }
+} catch(error){
+  document.getElementById('boxinreturn').innerHTML = '';
+   window.alert("ERROR: Unable to caputure! Please ensure the correct information was entered.");
+}
 
     //----------------------------------------------------------
   }

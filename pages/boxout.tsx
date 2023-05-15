@@ -27,7 +27,7 @@ const BoxOutPage: NextPage = () => {
     const boxout2val = boxout2.value;
     const boxout3val = boxout3.value;
     const specialout1val = specialout1.value;
-    const specialout2val = specialout1.value;
+    const specialout2val = specialout2.value;
     //----------------------------------------------------------
     document.getElementById('boxoutreturn').innerHTML =
       'Office: ' +
@@ -60,6 +60,7 @@ const BoxOutPage: NextPage = () => {
       nodate.getHours() + ':' + nodate.getMinutes() + ':' + nodate.getSeconds();
     const offout = 'officenum= ' + boxoutoffidval;
 
+ try{
     var offrecord = await pb.collection('offices').getFirstListItem(offout);
     const officerecordid = offrecord.id;
     const officeIDData = boxoutoffidval;
@@ -159,7 +160,7 @@ const BoxOutPage: NextPage = () => {
       specialout2val +
       ') Time: ' +
       outdisplay +
-      ' ]; ';
+      ' ]; &emsp;';
 
     const updateOffOUT = await pb.collection('offices').update(officerecordid, {
       offboxspecchecked: offboxes,
@@ -279,6 +280,10 @@ const BoxOutPage: NextPage = () => {
     offs1 = offrecord.offspec1;
     offs2 = offrecord.offspec2;
     offs3 = offrecord.offspec3;
+ } catch(error){
+   document.getElementById('boxoutreturn').innerHTML = '';
+   window.alert("ERROR: Unable to caputure! Please ensure the correct information was entered.");
+ }
 
     //----------------------------------------------------------
   }
