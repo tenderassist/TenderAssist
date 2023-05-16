@@ -34,11 +34,11 @@ const UserHome: NextPage = () => {
             </li>
           </Link>
 
-          {/*<Link href={'searchoffice'}>
+          <Link href={'searchoffice'}>
             <li>
               <div name='a'>Office Search</div>
             </li>
-          </Link>*/}
+          </Link>
 
           <Link href={'summary'}>
             <li>

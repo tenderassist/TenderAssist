@@ -76,11 +76,11 @@ const SummaryOfficePage: NextPage = () => {
             </li>
           </Link>
 
-          {/*<Link href={'searchoffice'}>
+          <Link href={'searchoffice'}>
             <li>
               <div name='a'>Office Search</div>
             </li>
-          </Link>*/}
+          </Link>
 
           <li>
             <div name='a' class='active'>Office Summary</div>

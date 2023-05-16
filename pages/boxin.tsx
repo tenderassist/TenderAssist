@@ -80,7 +80,7 @@ try{
       const box1record = await pb.collection('boxes').getFirstListItem(box1);
       const boxID1Data = box1record.id;
 
-      pb.collection('boxes').update(boxID1Data, {
+     await pb.collection('boxes').update(boxID1Data, {
         boxlastcheckin: datein,
         boxlastindisplay: indisplay,
         boxlastoffice: officeIDData,
@@ -94,7 +94,7 @@ try{
       const box2record = await pb.collection('boxes').getFirstListItem(box2);
       const boxID2Data = box2record.id;
 
-      pb.collection('boxes').update(boxID2Data, {
+     await pb.collection('boxes').update(boxID2Data, {
         boxlastcheckin: datein,
         boxlastindisplay: indisplay,
         boxlastoffice: officeIDData,
@@ -108,7 +108,7 @@ try{
       const box3record = await pb.collection('boxes').getFirstListItem(box3);
       const boxID3Data = box3record.id;
 
-      pb.collection('boxes').update(boxID3Data, {
+     await pb.collection('boxes').update(boxID3Data, {
         boxlastcheckin: datein,
         boxlastindisplay: indisplay,
         boxlastoffice: officeIDData,
@@ -124,7 +124,7 @@ try{
         .getFirstListItem(spec1);
       const specID1Data = spec1record.id;
 
-      pb.collection('specials').update(specID1Data, {
+     await pb.collection('specials').update(specID1Data, {
         speciallastcheckin: datein,
         speciallastindisplay: indisplay,
         speciallastoffice: officeIDData,
@@ -140,7 +140,7 @@ try{
         .getFirstListItem(spec2);
       const specID2Data = spec2record.id;
 
-      pb.collection('specials').update(specID2Data, {
+     await pb.collection('specials').update(specID2Data, {
         speciallastcheckin: datein,
         speciallastindisplay: indisplay,
         speciallastoffice: officeIDData,
@@ -149,24 +149,31 @@ try{
     }
 
     //Office Boxes-----------------------------------------------------------------------
+    offrecord = await pb.collection('offices').getFirstListItem(offin);
+    offb1in = offrecord.offbox1;
+    offb2in = offrecord.offbox2;
+    offb3in = offrecord.offbox3;
+    offb4in = offrecord.offbox4;
+    offb5in = offrecord.offbox5;
+    
     if (boxin1val == offb1in) {
-      pb.collection('offices').update(offrecordid, {
+     await pb.collection('offices').update(offrecordid, {
         offbox1: '',
       });
     } else if (boxin1val == offb2in) {
-      pb.collection('offices').update(offrecordid, {
+     await pb.collection('offices').update(offrecordid, {
         offbox2: '',
       });
     } else if (boxin1val == offb3in) {
-      pb.collection('offices').update(offrecordid, {
+     await pb.collection('offices').update(offrecordid, {
         offbox3: '',
       });
     } else if (boxin1val == offb4in) {
-      pb.collection('offices').update(offrecordid, {
+     await pb.collection('offices').update(offrecordid, {
         offbox4: '',
       });
     } else if (boxin1val == offb5in) {
-      pb.collection('offices').update(offrecordid, {
+     await pb.collection('offices').update(offrecordid, {
         offbox5: '',
       });
     }
@@ -178,23 +185,23 @@ try{
     offb5in = offrecord.offbox5;
 
     if (boxin2val == offb1in) {
-      pb.collection('offices').update(offrecordid, {
+     await pb.collection('offices').update(offrecordid, {
         offbox1: '',
       });
     } else if (boxin2val == offb2in) {
-      pb.collection('offices').update(offrecordid, {
+     await pb.collection('offices').update(offrecordid, {
         offbox2: '',
       });
     } else if (boxin2val == offb3in) {
-      pb.collection('offices').update(offrecordid, {
+     await pb.collection('offices').update(offrecordid, {
         offbox3: '',
       });
     } else if (boxin2val == offb4in) {
-      pb.collection('offices').update(offrecordid, {
+     await pb.collection('offices').update(offrecordid, {
         offbox4: '',
       });
     } else if (boxin2val == offb5in) {
-      pb.collection('offices').update(offrecordid, {
+     await pb.collection('offices').update(offrecordid, {
         offbox5: '',
       });
     }
@@ -206,37 +213,41 @@ try{
     offb5in = offrecord.offbox5;
 
     if (boxin3val == offb1in) {
-      pb.collection('offices').update(offrecordid, {
+     await pb.collection('offices').update(offrecordid, {
         offbox1: '',
       });
     } else if (boxin3val == offb2in) {
-      pb.collection('offices').update(offrecordid, {
+     await pb.collection('offices').update(offrecordid, {
         offbox2: '',
       });
     } else if (boxin3val == offb3in) {
-      pb.collection('offices').update(offrecordid, {
+     await pb.collection('offices').update(offrecordid, {
         offbox3: '',
       });
     } else if (boxin3val == offb4in) {
-      pb.collection('offices').update(offrecordid, {
+    await pb.collection('offices').update(offrecordid, {
         offbox4: '',
       });
     } else if (boxin3val == offb5in) {
-      pb.collection('offices').update(offrecordid, {
+     await pb.collection('offices').update(offrecordid, {
         offbox5: '',
       });
     }
     //Office Specials-----------------------------------------------------------------------
+    offrecord = await pb.collection('offices').getFirstListItem(offin);
+    var offs1in = offrecord.offspec1;
+    var offs2in = offrecord.offspec2;
+    var offs3in = offrecord.offspec3;
     if (specialin1val == offs1in) {
-      pb.collection('offices').update(offrecordid, {
+     await pb.collection('offices').update(offrecordid, {
         offspec1: '',
       });
     } else if (specialin1val == offs2in) {
-      pb.collection('offices').update(offrecordid, {
+     await pb.collection('offices').update(offrecordid, {
         offspec2: '',
       });
     } else if (specialin1val == offs3in) {
-      pb.collection('offices').update(offrecordid, {
+     await pb.collection('offices').update(offrecordid, {
         offspec3: '',
       });
     }
@@ -246,15 +257,15 @@ try{
     var offs3in = offrecord.offspec3;
 
     if (specialin2val == offs1in) {
-      pb.collection('offices').update(offrecordid, {
+     await pb.collection('offices').update(offrecordid, {
         offspec1: '',
       });
     } else if (specialin2val == offs2in) {
-      pb.collection('offices').update(offrecordid, {
+     await pb.collection('offices').update(offrecordid, {
         offspec2: '',
       });
     } else if (specialin2val == offs3in) {
-      pb.collection('offices').update(offrecordid, {
+     await pb.collection('offices').update(offrecordid, {
         offspec3: '',
       });
     }
@@ -295,11 +306,11 @@ try{
             </li>
           </Link>
 
-          {/*<Link href={'searchoffice'}>
+          <Link href={'searchoffice'}>
             <li>
               <div name='a'>Office Search</div>
             </li>
-          </Link>*/}
+          </Link>
 
           <Link href={'summary'}>
             <li>
