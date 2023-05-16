@@ -80,7 +80,7 @@ const BoxOutPage: NextPage = () => {
       const box1record = await pb.collection('boxes').getFirstListItem(box1);
       const boxID1Data = box1record.id;
 
-      pb.collection('boxes').update(boxID1Data, {
+      await pb.collection('boxes').update(boxID1Data, {
         boxlastcheckout: dateout,
         boxlastoutdisplay: outdisplay,
         boxlastoffice: officeIDData,
@@ -93,7 +93,7 @@ const BoxOutPage: NextPage = () => {
       const box2record = await pb.collection('boxes').getFirstListItem(box2);
       const boxID2Data = box2record.id;
 
-      pb.collection('boxes').update(boxID2Data, {
+      await pb.collection('boxes').update(boxID2Data, {
         boxlastcheckout: dateout,
         boxlastoutdisplay: outdisplay,
         boxlastoffice: officeIDData,
@@ -106,7 +106,7 @@ const BoxOutPage: NextPage = () => {
       const box3record = await pb.collection('boxes').getFirstListItem(box3);
       const boxID3Data = box3record.id;
 
-      pb.collection('boxes').update(boxID3Data, {
+     await pb.collection('boxes').update(boxID3Data, {
         boxlastcheckout: dateout,
         boxlastoutdisplay: outdisplay,
         boxlastoffice: officeIDData,
@@ -122,7 +122,7 @@ const BoxOutPage: NextPage = () => {
         .getFirstListItem(spec1);
       const specID1Data = spec1record.id;
 
-      pb.collection('specials').update(specID1Data, {
+     await pb.collection('specials').update(specID1Data, {
         speciallastcheckout: dateout,
         speciallastoutdisplay: outdisplay,
         speciallastoffice: officeIDData,
@@ -137,7 +137,7 @@ const BoxOutPage: NextPage = () => {
         .getFirstListItem(spec2);
       const specID2Data = spec2record.id;
 
-      pb.collection('specials').update(specID2Data, {
+     await pb.collection('specials').update(specID2Data, {
         speciallastcheckout: dateout,
         speciallastoutdisplay: outdisplay,
         speciallastoffice: officeIDData,
@@ -166,24 +166,30 @@ const BoxOutPage: NextPage = () => {
       offboxspecchecked: offboxes,
     });
     //Office boxes------------------------------------------
+    offrecord = await pb.collection('offices').getFirstListItem(offout);
+    offb1 = offrecord.offbox1;
+    offb2 = offrecord.offbox2;
+    offb3 = offrecord.offbox3;
+    offb4 = offrecord.offbox4;
+    offb5 = offrecord.offbox5;
     if (offb1 == '') {
-      pb.collection('offices').update(officerecordid, {
+     await pb.collection('offices').update(officerecordid, {
         offbox1: boxout1val,
       });
     } else if (offb2 == '') {
-      pb.collection('offices').update(officerecordid, {
+      await pb.collection('offices').update(officerecordid, {
         offbox2: boxout1val,
       });
     } else if (offb3 == '') {
-      pb.collection('offices').update(officerecordid, {
+      await pb.collection('offices').update(officerecordid, {
         offbox3: boxout1val,
       });
     } else if (offb4 == '') {
-      pb.collection('offices').update(officerecordid, {
+      await pb.collection('offices').update(officerecordid, {
         offbox4: boxout1val,
       });
     } else if (offb5 == '') {
-      pb.collection('offices').update(officerecordid, {
+      await pb.collection('offices').update(officerecordid, {
         offbox5: boxout1val,
       });
     }
@@ -195,23 +201,23 @@ const BoxOutPage: NextPage = () => {
     offb5 = offrecord.offbox5;
 
     if (offb1 == '') {
-      pb.collection('offices').update(officerecordid, {
+      await pb.collection('offices').update(officerecordid, {
         offbox1: boxout2val,
       });
     } else if (offb2 == '') {
-      pb.collection('offices').update(officerecordid, {
+      await pb.collection('offices').update(officerecordid, {
         offbox2: boxout2val,
       });
     } else if (offb3 == '') {
-      pb.collection('offices').update(officerecordid, {
+      await pb.collection('offices').update(officerecordid, {
         offbox3: boxout2val,
       });
     } else if (offb4 == '') {
-      pb.collection('offices').update(officerecordid, {
+      await pb.collection('offices').update(officerecordid, {
         offbox4: boxout2val,
       });
     } else if (offb5 == '') {
-      pb.collection('offices').update(officerecordid, {
+      await pb.collection('offices').update(officerecordid, {
         offbox5: boxout2val,
       });
     }
@@ -223,38 +229,38 @@ const BoxOutPage: NextPage = () => {
     offb5 = offrecord.offbox5;
 
     if (offb1 == '') {
-      pb.collection('offices').update(officerecordid, {
+      await pb.collection('offices').update(officerecordid, {
         offbox1: boxout3val,
       });
     } else if (offb2 == '') {
-      pb.collection('offices').update(officerecordid, {
+      await pb.collection('offices').update(officerecordid, {
         offbox2: boxout3val,
       });
     } else if (offb3 == '') {
-      pb.collection('offices').update(officerecordid, {
+      await pb.collection('offices').update(officerecordid, {
         offbox3: boxout3val,
       });
     } else if (offb4 == '') {
-      pb.collection('offices').update(officerecordid, {
+      await pb.collection('offices').update(officerecordid, {
         offbox4: boxout3val,
       });
     } else if (offb5 == '') {
-      pb.collection('offices').update(officerecordid, {
+      await pb.collection('offices').update(officerecordid, {
         offbox5: boxout3val,
       });
     }
 
     //Office specials------------------------------------------
     if (offs1 == '') {
-      pb.collection('offices').update(officerecordid, {
+      await pb.collection('offices').update(officerecordid, {
         offspec1: specialout1val,
       });
     } else if (offs2 == '') {
-      pb.collection('offices').update(officerecordid, {
+      await pb.collection('offices').update(officerecordid, {
         offspec2: specialout1val,
       });
     } else if (offs3 == '') {
-      pb.collection('offices').update(officerecordid, {
+     await pb.collection('offices').update(officerecordid, {
         offspec3: specialout1val,
       });
     }
@@ -264,15 +270,15 @@ const BoxOutPage: NextPage = () => {
     offs3 = offrecord.offspec3;
 
     if (offs1 == '') {
-      pb.collection('offices').update(officerecordid, {
+     await pb.collection('offices').update(officerecordid, {
         offspec1: specialout2val,
       });
     } else if (offs2 == '') {
-      pb.collection('offices').update(officerecordid, {
+     await pb.collection('offices').update(officerecordid, {
         offspec2: specialout2val,
       });
     } else if (offs3 == '') {
-      pb.collection('offices').update(officerecordid, {
+     await pb.collection('offices').update(officerecordid, {
         offspec3: specialout2val,
       });
     }
@@ -317,11 +323,11 @@ const BoxOutPage: NextPage = () => {
             </li>
           </Link>
 
-          {/*<Link href={'searchoffice'}>
+          <Link href={'searchoffice'}>
             <li>
               <div name='a'>Office Search</div>
             </li>
-          </Link>*/}
+          </Link>
 
           <Link href={'summary'}>
             <li>
