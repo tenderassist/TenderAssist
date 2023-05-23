@@ -1,47 +1,46 @@
 import type { NextPage } from 'next';
 import styles from '../styles/Home.module.css';
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 const AdminHome: NextPage = () => {
   return (
     <div>
-      <div id='middle'>
+      <div data-name='middle'>
         <h1>&quot;TenderAssist&quot;</h1>
       </div>
       <nav>
         <ul>
           <li>
-            <div name='a' class='active'>Home</div>
+            <div data-name='a' className='active'>Home</div>
           </li>
 
           <Link href={'addboxes'}>
             <li>
-              <div name='a'>Add Boxes/Specials</div>
+              <div data-name='a'>Add Boxes/Specials</div>
             </li>
           </Link>
 
           <Link href={'deleteboxes'}>
             <li>
-              <div name='a'>Delete Boxes/Specials</div>
+              <div data-name='a'>Delete Boxes/Specials</div>
             </li>
           </Link>
 
           <Link href={'addoffices'}>
             <li>
-              <div name='a'>Add Offices</div>
+              <div data-name='a'>Add Offices</div>
             </li>
           </Link>
 
           <Link href={'updateoffices'}>
             <li>
-              <div name='a'>Update Offices</div>
+              <div data-name='a'>Update Offices</div>
             </li>
           </Link>
 
           <Link href={'user_home'}>
             <li>
-              <div name='a'>Switch to &quot;User Mode&quot;</div>
+              <div data-name='a'>Switch to &quot;User Mode&quot;</div>
             </li>
           </Link>
         </ul>
