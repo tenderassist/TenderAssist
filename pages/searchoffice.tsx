@@ -1,28 +1,33 @@
 import type { NextPage } from 'next';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import styles from '../styles/Home.module.css';
-import { useState, useEffect } from 'react';
-import { ListResult } from 'pocketbase';
+import { useState, ChangeEvent } from 'react';
 const PocketBase = require('pocketbase/cjs');
 const pb = new PocketBase('https://tenderassist.pockethost.io');
 pb.autoCancellation(false);
 
 const SearchOfficePage: NextPage = () => {
-  //Enter Button
+  const [feedback, setfeedback] = useState('');
+  const [offidsearch, setoffidsearch] = useState('');
+  
+  //Enter Button--------------------------------------
   const [value, setValue] = useState('');
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.keyCode === 13) {
-      // Call your function here
       SearchOffices();
     }
   };
   //---------------------------------------------------
+  const handleInputoffidsearch = (event: ChangeEvent<HTMLInputElement>) => {
+    setoffidsearch(event.target.value);
+  };
 
+  //---------------------------------------------------
   async function SearchOffices() {
+    setfeedback('Loading...');
     try{
-    const officenum = 'officenum= ' + offidsearch.value;
+    const officenum = 'officenum= ' + offidsearch;
 
     const officerecord = await pb
       .collection('offices')
@@ -69,91 +74,91 @@ const SearchOfficePage: NextPage = () => {
     }
     //---------------------------------------------------------
 
-    document.getElementById('officereturninfo').innerHTML =
+    setfeedback(
       'Office Number: ' +
-      offidsearch.value +
+      offidsearch +
       '; Company: ' +
       officeCompany +
       '; Currently has Boxes: ' +
       boxlist +
       'and Specials: ' +
-      speclist;
+      speclist);
 
-    document.getElementById('offidsearch').value = '';
     } catch (error){
       window.alert("ERROR: Could not find the Office! Please ensure the correct office number is entered.")
+      setfeedback('');
     }
+    setoffidsearch('');
   }
 
   return (
     <div>
-      <div name='middle'>
+      <div data-name='middle'>
         <h1>&quot;TenderAssist&quot;</h1>
       </div>
       <nav>
         <ul>
           <Link href={'user_home'}>
             <li>
-              <div name='a'>Home</div>
+              <div data-name='a'>Home</div>
             </li>
           </Link>
 
           <Link href={'boxout'}>
             <li>
-              <div name='a'>Boxes Out</div>
+              <div data-name='a'>Boxes Out</div>
             </li>
           </Link>
 
           <Link href={'boxin'}>
             <li>
-              <div name='a'>Boxes In</div>
+              <div data-name='a'>Boxes In</div>
             </li>
           </Link>
 
           <Link href={'searchbox'}>
             <li>
-              <div name='a'>Search Boxes/Specials</div>
+              <div data-name='a'>Search Boxes/Specials</div>
             </li>
           </Link>
 
           <li>
-            <div name='a' class='active'>Office Search</div>
+            <div data-name='a' className='active'>Office Search</div>
           </li>
 
           <Link href={'summary'}>
             <li>
-              <div name='a'>Office Summary</div>
+              <div data-name='a'>Office Summary</div>
             </li>
           </Link>
 
           <Link href={'checkoutstanding'}>
             <li>
-              <div name='a'>Check Outstanding</div>
+              <div data-name='a'>Check Outstanding</div>
             </li>
           </Link>
         </ul>
       </nav>
 
-      <div name='middle'>
+      <div data-name='middle'>
         <h2>Office Search</h2>
         <p>Please enter the number of the office you are searching for</p>
         <br />
         <label>Office Number: </label>
         <input
           type='text'
-          id='offidsearch'
-          name='offidsearch'
           placeholder='E.g. 1'
-          onChange={(event) => setValue(event.target.value)}
+          value={offidsearch}
+          onChange={handleInputoffidsearch}
           onKeyDown={handleKeyPress}
         />
         <br />
 
-        <p name='feedback' id='officereturninfo'></p>
+        <p data-name='feedback'>{feedback}</p>
 
         <br />
 
-        <button id='btnOfficeSearch' onClick={SearchOffices}>
+        <button onClick={SearchOffices}>
           Search
         </button>
       </div>

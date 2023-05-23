@@ -1,60 +1,58 @@
 import type { NextPage } from 'next';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import styles from '../styles/Home.module.css';
-import { useState, useEffect } from 'react';
 
 const UserHome: NextPage = () => {
   return (
     <div>
-      <div name='middle'>
+      <div data-name='middle'>
         <h1>&quot;TenderAssist&quot;</h1>
       </div>
       <nav>
         <ul>
           <li>
-            <div name='a' class='active'>Home</div>
+            <div data-name='a' className='active'>Home</div>
           </li>
 
           <Link href={'boxout'}>
             <li>
-              <div name='a'>Boxes Out</div>
+              <div data-name='a'>Boxes Out</div>
             </li>
           </Link>
 
           <Link href={'boxin'}>
             <li>
-              <div name='a'>Boxes In</div>
+              <div data-name='a'>Boxes In</div>
             </li>
           </Link>
 
           <Link href={'searchbox'}>
             <li>
-              <div name='a'>Search Boxes/Specials</div>
+              <div data-name='a'>Search Boxes/Specials</div>
             </li>
           </Link>
 
-          {/*<Link href={'searchoffice'}>
+          <Link href={'searchoffice'}>
             <li>
-              <div name='a'>Office Search</div>
+              <div data-name='a'>Office Search</div>
             </li>
-          </Link>*/}
+          </Link>
 
           <Link href={'summary'}>
             <li>
-              <div name='a'>Office Summary</div>
+              <div data-name='a'>Office Summary</div>
             </li>
           </Link>
 
           <Link href={'checkoutstanding'}>
             <li>
-              <div name='a'>Check Outstanding</div>
+              <div data-name='a'>Check Outstanding</div>
             </li>
           </Link>
 
           <Link href={'login'}>
             <li>
-              <div name='a'>Switch to &quot;Admin Mode&quot;</div>
+              <div data-name='a'>Switch to &quot;Admin Mode&quot;</div>
             </li>
           </Link>
         </ul>

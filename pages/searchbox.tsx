@@ -1,30 +1,39 @@
 import type { NextPage } from 'next';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import styles from '../styles/Home.module.css';
-import { useState, useEffect } from 'react';
-import { ListResult } from 'pocketbase';
+import { useState, ChangeEvent } from 'react';
 const PocketBase = require('pocketbase/cjs');
 const pb = new PocketBase('https://tenderassist.pockethost.io');
 pb.autoCancellation(false);
 
 const SearchBoxPage: NextPage = () => {
-  //Enter Button
+  const [feedback, setfeedback] = useState('');
+  const [typetosearch, settypetosearch] = useState('');
+  const [boxnumsearch, setboxnumsearch] = useState('');
+  
+  //Enter Button--------------------------------------
   const [value, setValue] = useState('');
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.keyCode === 13) {
-      // Call your function here
       SearchBox();
     }
   };
   //---------------------------------------------------
+  const handleInputtypetosearch = (event: ChangeEvent<HTMLSelectElement>) => {
+    settypetosearch(event.target.value);
+  };
+  
+  const handleInputboxnumsearch = (event: ChangeEvent<HTMLInputElement>) => {
+    setboxnumsearch(event.target.value);
+  };
 
+  //---------------------------------------------------
   async function SearchBox() {
-    const typetosearch = typesearch.value;
+    setfeedback('Loading...');
     //---------------------------------------------------------------------
     if (typetosearch == 'searchbox') {
-      const boxsearchnum = 'boxnum= ' + boxnumsearch.value;
+      const boxsearchnum = 'boxnum= ' + boxnumsearch;
       
       try {
       const boxrecord = await pb
@@ -37,9 +46,9 @@ const SearchBoxPage: NextPage = () => {
       const boxTempInData = boxrecord.boxtemplastcheckin;
       const boxTempOutData = boxrecord.boxtemplastcheckout;
 
-      document.getElementById('searchboxreturn').innerHTML =
+      setfeedback(
         'Box: ' +
-        boxnumsearch.value +
+        boxnumsearch +
         '; Last Office: ' +
         boxOffData +
         '; LAST CHECKED OUT: [' +
@@ -49,14 +58,15 @@ const SearchBoxPage: NextPage = () => {
         '; LAST CHECKED IN: [' +
         boxInData +
         ']; Checked in by: ' +
-        boxTempInData;
+        boxTempInData);
     } catch(error){
       window.alert("ERROR: Could not find the box! Please ensure the box number is entered correctly.");
+      setfeedback('');
     }
     }
     //--------------------------------------------------------------------------
     if (typetosearch == 'searchspecial') {
-      const specsearchnum = 'specialnum= ' + boxnumsearch.value;
+      const specsearchnum = 'specialnum= ' + boxnumsearch;
       
       try{
       const specrecord = await pb
@@ -69,9 +79,9 @@ const SearchBoxPage: NextPage = () => {
       const specTempInData = specrecord.specialtemplastcheckin;
       const specTempOutData = specrecord.specialtemplastcheckout;
 
-      document.getElementById('searchboxreturn').innerHTML =
+      setfeedback(
         'Special: ' +
-        boxnumsearch.value +
+        boxnumsearch +
         '; Last Office: ' +
         specOffData +
         '; LAST CHECKED OUT: [' +
@@ -81,71 +91,73 @@ const SearchBoxPage: NextPage = () => {
         '; LAST CHECKED IN: [' +
         specInData +
         ']; Checked in by: ' +
-        specTempInData;
+        specTempInData);
       } catch(error){
         window.alert("ERROR: Could not find the Special! Please ensure the special number is entered correctly.");
+        setfeedback('');
       }
     }
     //--------------------------------------------------------------------------
-    document.getElementById('boxnumsearch').value = '';
+    settypetosearch('');
+    setboxnumsearch('');
   }
 
   return (
     <div>
-      <div name='middle'>
+      <div data-name='middle'>
         <h1>&quot;TenderAssist&quot;</h1>
       </div>
       <nav>
         <ul>
           <Link href={'user_home'}>
             <li>
-              <div name='a'>Home</div>
+              <div data-name='a'>Home</div>
             </li>
           </Link>
 
           <Link href={'boxout'}>
             <li>
-              <div name='a'>Boxes Out</div>
+              <div data-name='a'>Boxes Out</div>
             </li>
           </Link>
 
           <Link href={'boxin'}>
             <li>
-              <div name='a'>Boxes In</div>
+              <div data-name='a'>Boxes In</div>
             </li>
           </Link>
 
           <li>
-            <div name='a' class='active'>Search Boxes/Specials</div>
+            <div data-name='a' className='active'>Search Boxes/Specials</div>
           </li>
 
-          {/*<Link href={'searchoffice'}>
+          <Link href={'searchoffice'}>
             <li>
-              <div name='a'>Office Search</div>
+              <div data-name='a'>Office Search</div>
             </li>
-          </Link>*/}
+          </Link>
 
           <Link href={'summary'}>
             <li>
-              <div name='a'>Office Summary</div>
+              <div data-name='a'>Office Summary</div>
             </li>
           </Link>
 
           <Link href={'checkoutstanding'}>
             <li>
-              <div name='a'>Check Outstanding</div>
+              <div data-name='a'>Check Outstanding</div>
             </li>
           </Link>
         </ul>
       </nav>
 
-      <div name='middle'>
+      <div data-name='middle'>
         <h2>Search Boxes/Specials</h2>
         <p>Please enter the required information below</p>
         <br />
         <label>Are you searching for a box or a special?: </label>
-        <select id='typesearch'>
-          <option value='Default'>Select Type</option>
+        <select value={typetosearch} onChange={handleInputtypetosearch}>
+          <option value=''>Select Type</option>
           <option value='searchbox'>Box</option>
           <option value='searchspecial'>Special</option>
         </select>
@@ -153,17 +165,16 @@ const SearchBoxPage: NextPage = () => {
         <br />
         <label>Box/Special Number: </label>
         <input
-          id='boxnumsearch'
-          name='boxnumsearch'
           placeholder='E.g. 21'
-          onChange={(event) => setValue(event.target.value)}
+          value={boxnumsearch}
+          onChange={handleInputboxnumsearch}
           onKeyDown={handleKeyPress}
         />
         <br />
 
-        <p name='feedback' id='searchboxreturn'></p>
+        <p data-name='feedback'>{feedback}</p>
 
-        <button id='btnBoxSearch' onClick={SearchBox}>
+        <button onClick={SearchBox}>
           Search
         </button>
       </div>

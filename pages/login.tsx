@@ -1,63 +1,72 @@
 import type { NextPage } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import styles from '../styles/Home.module.css';
-import { useState, useEffect } from 'react';
+import { useState, ChangeEvent } from 'react';
 
 const LoginPage: NextPage = () => {
   let router = useRouter();
+  const [feedback, setfeedback] = useState('');
+  const [username, setusername] = useState('');
+  const [password, setpassword] = useState('');
 
-  //Enter Button
+  //Enter Button--------------------------------------
   const [value, setValue] = useState('');
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.keyCode === 13) {
-      // Call your function here
       LogRedierct();
     }
   };
   //---------------------------------------------------
-
+  const handleInputusername = (event: ChangeEvent<HTMLInputElement>) => {
+    setusername(event.target.value);
+  };
+  
+  const handleInputpassword = (event: ChangeEvent<HTMLInputElement>) => {
+    setpassword(event.target.value);
+  };
+  //---------------------------------------------------
   function LogRedierct() {
-    const loginfo = {
-      uname: loginusername.value,
-      pword: loginpassword.value,
-    };
 
-    if (loginfo.uname == 'admin' && loginfo.pword == 'admin2023') {
+    if (username == 'admin' && password == 'admin2023') {
       console.log('admin logged in');
       router.push('/admin_home');
-    } else if (loginfo.uname == 'user' && loginfo.pword == 'user2023') {
+    } else if (username == 'user' && password == 'user2023') {
       console.log('user logged in');
       router.push('user_home');
     } else {
-      document.getElementById('incorrectindexreturn').innerHTML =
-        'Incorrect Username or Password!!!';
+      setfeedback('Incorrect Username or Password!!!');
     }
   }
 
   return (
-    <div name='middle'>
+    <div data-name='middle'>
       <h1>&quot;TenderAssist&quot;</h1>
       <br />
       <br />
       <label>Username:</label>
-      <input type='text' id='loginusername' placeholder='Enter username' />
+      <input 
+      type='text' 
+      placeholder='Enter username' 
+      value={username}
+      onChange={handleInputusername}
+      onKeyDown={handleKeyPress}
+      />
       <br />
       <br />
       <label>Password:</label>
       <input
         type='password'
-        id='loginpassword'
         placeholder='Enter password'
-        onChange={(event) => setValue(event.target.value)}
+        value ={password}
+        onChange={handleInputpassword}
         onKeyDown={handleKeyPress}
       />
       <br />
-      <p id='incorrectindexreturn'></p>
+      <p data-name='incorrectindexreturn'>{feedback}</p>
 
-      <button id='btnLogin' onClick={LogRedierct}>
+      <button onClick={LogRedierct}>
         Submit
       </button>
     </div>

@@ -1,28 +1,39 @@
 import type { NextPage } from 'next';
 import styles from '../styles/Home.module.css';
-import { useState, useEffect } from 'react';
+import { useState, ChangeEvent } from 'react';
 import Link from 'next/link';
-import { ListResult } from 'pocketbase';
 const PocketBase = require('pocketbase/cjs');
 const pb = new PocketBase('https://tenderassist.pockethost.io');
 pb.autoCancellation(false);
 
-const AddBoxesPage: NextPage = () => {
-  //Enter Button
+const AddBoxesPage: NextPage = () => { 
+    const [feedback, setfeedback] = useState('');
+    const [boxorspec, setboxorspec] = useState('');
+    const [bnsnum, setbnsnum] = useState('');
+  
+  //Enter Button--------------------------------------
   const [value, setValue] = useState('');
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.keyCode === 13) {
-      // Call your function here
       AddBoxesnSpec();
     }
   };
-  //---------------------------------------------------
-
+  //Get Input Values-----------------------------------
+    const handleInputboxorspec = (event: ChangeEvent<HTMLSelectElement>) => {
+    setboxorspec(event.target.value);
+  };
+  
+  const handleInputbnsnum = (event: ChangeEvent<HTMLInputElement>) => {
+    setbnsnum(event.target.value);
+  };
+  
+  //---------------------------------------------------  
   async function AddBoxesnSpec() {
-    const boxorspec = addboxspecial.value;
-    const bnsnum = addboxspecnum.value;
-
+    console.log(boxorspec);
+    console.log(bnsnum);
+    setfeedback('Loading...');
+  
     if (boxorspec == 'addbox') {
       const data = {
         boxnum: bnsnum,
@@ -30,10 +41,11 @@ const AddBoxesPage: NextPage = () => {
 
       try {
         const record = await pb.collection('boxes').create(data);
-
-        document.getElementById('addboxreturn').innerHTML = 'Successfuly added Box ' + bnsnum;
+        setfeedback('Successfuly added Box ' + bnsnum);
+        
       } catch (error) {
         window.alert("ERROR: Unable to add box!");
+        setfeedback('');
   }
     }
 
@@ -44,60 +56,61 @@ const AddBoxesPage: NextPage = () => {
       
       try{
       const record = await pb.collection('specials').create(data);
-
-      document.getElementById('addboxreturn').innerHTML =
-        'Successfuly added Special ' + bnsnum;
+      setfeedback('Successfuly added Special ' + bnsnum);
+      
     } catch (error) {
       window.alert("ERROR: Unable to add Special!");
+      setfeedback('');
     }
     }
-    document.getElementById('addboxspecnum').value = '';
+    setboxorspec('');
+    setbnsnum('');
   }
 
   return (
     <div>
-      <div name='middle'>
+      <div data-name='middle'>
         <h1>&quot;TenderAssist&quot;</h1>
       </div>
       <nav>
         <ul>
           <Link href={'admin_home'}>
             <li>
-              <div name='a'>Home</div>
+              <div data-name='a'>Home</div>
             </li>
           </Link>
 
           <li>
-            <div name='a' class='active'>Add Boxes/Specials</div>
+            <div data-name='a' className='active'>Add Boxes/Specials</div>
           </li>
 
           <Link href={'deleteboxes'}>
             <li>
-              <div name='a'>Delete Boxes/Specials</div>
+              <div data-name='a'>Delete Boxes/Specials</div>
             </li>
           </Link>
 
           <Link href={'addoffices'}>
             <li>
-              <div name='a'>Add Offices</div>
+              <div data-name='a'>Add Offices</div>
             </li>
           </Link>
 
           <Link href={'updateoffices'}>
             <li>
-              <div name='a'>Update Offices</div>
+              <div data-name='a'>Update Offices</div>
             </li>
           </Link>
 
           <Link href={'user_home'}>
             <li>
-              <div name='a'>Switch to User Mode</div>
+              <div data-name='a'>Switch to User Mode</div>
             </li>
           </Link>
         </ul>
       </nav>
 
-      <div name='middle'>
+      <div data-name='middle'>
         <h2>Add Box/Special</h2>
         <p>
           Please enter the details of the box/special you would like to add
@@ -105,7 +118,8 @@ const AddBoxesPage: NextPage = () => {
         </p>
         <br />
         <label>Type: </label>
-        <select name='addboxspecial' id='addboxspecial'>
+        <select value={boxorspec} onChange={handleInputboxorspec}>
+          <option value=''>Select type</option>
           <option value='addbox'>Box</option>
           <option value='addspecial'>Special</option>
         </select>
@@ -113,17 +127,16 @@ const AddBoxesPage: NextPage = () => {
 
         <label>Box/Special Number: </label>
         <input
-          id='addboxspecnum'
-          name='addboxspecnum'
           placeholder='E.g. 21'
-          onChange={(event) => setValue(event.target.value)}
+          value={bnsnum}
+          onChange={handleInputbnsnum}
           onKeyDown={handleKeyPress}
         />
         <br />
 
-        <p name='feedback' id='addboxreturn'></p>
+        <p data-name='feedback'>{feedback}</p>
 
-        <button id='btnAddBox' onClick={AddBoxesnSpec}>
+        <button onClick={AddBoxesnSpec}>
           Add
         </button>
       </div>

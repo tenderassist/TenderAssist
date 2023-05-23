@@ -53,11 +53,11 @@ p {
   padding: 2px;
 }
 
-p[name="feedback"] {
+p[data-name="feedback"] {
   color: #00d0ff;
 }
 
-p[id="incorrectindexreturn"] {
+p[data-name="incorrectindexreturn"] {
   color: red;
 }
 
@@ -100,7 +100,7 @@ nav li{
   float: left;
 }
 
-nav li div[name="a"] {
+nav li div[data-name="a"] {
   display: block;
   color: white;
   text-align: center;
@@ -109,7 +109,7 @@ nav li div[name="a"] {
 }
 
 /* Change the link color on hover */
-nav li div[name="a"]:hover {
+nav li div[data-name="a"]:hover {
   background-color: #1f79ff;
 }
 
@@ -177,7 +177,7 @@ img {
   width: 65px;
 }
 
-div [name="middle"] {
+div [data-name="middle"] {
   display: grid;
   place-items: center;
 }
