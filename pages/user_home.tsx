@@ -32,11 +32,11 @@ const UserHome: NextPage = () => {
             </li>
           </Link>
 
-          <Link href={'searchoffice'}>
+          {/*<Link href={'searchoffice'}>
             <li>
               <div data-name='a'>Office Search</div>
             </li>
-          </Link>
+          </Link>*/}
 
           <Link href={'summary'}>
             <li>
@@ -71,8 +71,8 @@ const UserHome: NextPage = () => {
       <h3>Search Boxes/Specials</h3>
       <p>Whenever you&apos;re looking for a specific box or special, you can use the Search Boxes/Specials page to find out which office had the box/special last, what time it went out as well the time it was last returned.</p>
           
-      <h3>Office Search</h3>
-      <p>The Office Search page allows you to find out what company is occupying a specific office, as well as the boxes and specials currently in that office.</p>
+      <h3>Office Summary</h3>
+      <p>The Office Summary page provides a summary of every box and special a specific office had checked that day, as well as the time they had checked them out.</p>
       
       <h3>Check Outstanding</h3>
       <p>With just the click of a button, the Check Outstanding page will tell you which box or special has been in an office for longer than 45 minutes.</p>

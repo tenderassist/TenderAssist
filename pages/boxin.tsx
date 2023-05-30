@@ -63,10 +63,11 @@ const BoxInPage: NextPage = () => {
     const offin = 'officenum= ' + boxinoffidval;
 
 try{
+  setfeedback('Loading.');
     var offrecord = await pb.collection('offices').getFirstListItem(offin);
     const offrecordid = offrecord.id;
     const officeIDData = boxinoffidval;
-    var offb1in = offrecord.offbox1;
+    {/*var offb1in = offrecord.offbox1;
     var offb2in = offrecord.offbox2;
     var offb3in = offrecord.offbox3;
     var offb4in = offrecord.offbox4;
@@ -195,81 +196,52 @@ try{
      await pb.collection('offices').update(offrecordid, {
         offspec3: '',
       });
-    }
+    }*/}
 
     // BOXES ----------------------------------------------------------------
-    if (boxin1val != '') {
-      const box1 = 'boxnum= ' + boxin1val;
-      const box1record = await pb.collection('boxes').getFirstListItem(box1);
-      const boxID1Data = box1record.id;
+    setfeedback('Loading..');
+     const updateBoxes = async (boxVal: string) => {
+    if (boxVal) {
+      const boxNum = 'boxnum= ' + boxVal;
+      const boxRecord = await pb.collection('boxes').getFirstListItem(boxNum);
+      const boxIDData = boxRecord.id;
 
-     await pb.collection('boxes').update(boxID1Data, {
+      await pb.collection('boxes').update(boxIDData, {
         boxlastcheckin: datein,
         boxlastindisplay: indisplay,
         boxlastoffice: officeIDData,
         boxtemplastcheckin: tempIDData,
       });
     }
+  };
 
-    //-----------------------------------------------------------------------
-    if (boxin2val != '') {
-      const box2 = 'boxnum= ' + boxin2val;
-      const box2record = await pb.collection('boxes').getFirstListItem(box2);
-      const boxID2Data = box2record.id;
-
-     await pb.collection('boxes').update(boxID2Data, {
-        boxlastcheckin: datein,
-        boxlastindisplay: indisplay,
-        boxlastoffice: officeIDData,
-        boxtemplastcheckin: tempIDData,
-      });
-    }
-
-    //-----------------------------------------------------------------------
-    if (boxin3val != '') {
-      const box3 = 'boxnum= ' + boxin3val;
-      const box3record = await pb.collection('boxes').getFirstListItem(box3);
-      const boxID3Data = box3record.id;
-
-     await pb.collection('boxes').update(boxID3Data, {
-        boxlastcheckin: datein,
-        boxlastindisplay: indisplay,
-        boxlastoffice: officeIDData,
-        boxtemplastcheckin: tempIDData,
-      });
-    }
+  await Promise.all([
+    updateBoxes(boxin1val),
+    updateBoxes(boxin2val),
+    updateBoxes(boxin3val),
+  ]);
 
     // SPECIALS -----------------------------------------------------------------------
-    if (specialin1val != '') {
-      const spec1 = 'specialnum= ' + specialin1val;
-      const spec1record = await pb
-        .collection('specials')
-        .getFirstListItem(spec1);
-      const specID1Data = spec1record.id;
+    setfeedback('Loading...');
+      const updateSpecials = async (specVal: string) => {
+    if (specVal) {
+      const specNum = 'specialnum= ' + specVal;
+      const specRecord = await pb.collection('specials').getFirstListItem(specNum);
+      const specIDData = specRecord.id;
 
-     await pb.collection('specials').update(specID1Data, {
+      await pb.collection('specials').update(specIDData, {
         speciallastcheckin: datein,
         speciallastindisplay: indisplay,
         speciallastoffice: officeIDData,
         specialtemplastcheckin: tempIDData,
       });
     }
+  };
 
-    //-----------------------------------------------------------------------
-    if (specialin2val != '') {
-      const spec2 = 'specialnum= ' + specialin2val;
-      const spec2record = await pb
-        .collection('specials')
-        .getFirstListItem(spec2);
-      const specID2Data = spec2record.id;
-
-     await pb.collection('specials').update(specID2Data, {
-        speciallastcheckin: datein,
-        speciallastindisplay: indisplay,
-        speciallastoffice: officeIDData,
-        specialtemplastcheckin: tempIDData,
-      });
-    }
+  await Promise.all([
+    updateSpecials(specialin1val),
+    updateSpecials(specialin2val),
+  ]);
     //----------------------------------------------------------
     setfeedback(
       'Office: ' +
@@ -331,11 +303,11 @@ try{
             </li>
           </Link>
 
-          <Link href={'searchoffice'}>
+          {/*<Link href={'searchoffice'}>
             <li>
               <div data-name='a'>Office Search</div>
             </li>
-          </Link>
+          </Link>*/}
 
           <Link href={'summary'}>
             <li>
