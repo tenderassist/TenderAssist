@@ -38,7 +38,7 @@ const DeleteBoxesPage: NextPage = () => {
     sort: 'boxnum',
   });
 
-    const boxString = boxRecords.map((entry) => entry.boxnum).join(', ');
+    const boxString = boxRecords.map((entry: { boxnum: string }) => entry.boxnum).join(', ');
     setfeedbackBoxes(boxString);
     
     }catch(error){
@@ -55,7 +55,7 @@ const DeleteBoxesPage: NextPage = () => {
     sort: 'specialnum',
   });
 
-    const specialString = specialRecords.map((entry) => entry.specialnum).join(', ');
+    const specialString = specialRecords.map((entry: { specialnum: string }) => entry.specialnum).join(', ');
     setfeedbackSpecials(specialString);
     
     }catch(error){

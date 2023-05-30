@@ -200,7 +200,7 @@ try{
 
     // BOXES ----------------------------------------------------------------
     setfeedback('Loading..');
-     const updateBoxes = async (boxVal) => {
+     const updateBoxes = async (boxVal: string) => {
     if (boxVal) {
       const boxNum = 'boxnum= ' + boxVal;
       const boxRecord = await pb.collection('boxes').getFirstListItem(boxNum);
@@ -223,7 +223,7 @@ try{
 
     // SPECIALS -----------------------------------------------------------------------
     setfeedback('Loading...');
-      const updateSpecials = async (specVal) => {
+      const updateSpecials = async (specVal: string) => {
     if (specVal) {
       const specNum = 'specialnum= ' + specVal;
       const specRecord = await pb.collection('specials').getFirstListItem(specNum);

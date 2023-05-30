@@ -32,7 +32,7 @@ const DeleteOfficePage: NextPage = () => {
     sort: 'officenum',
   });
 
-    const officeString = officeRecords.map((entry) => entry.officenum).join(', ');
+    const officeString = officeRecords.map((entry: { officenum: string }) => entry.officenum).join(', ');
     setfeedbackOffices(officeString);
     
     }catch(error){

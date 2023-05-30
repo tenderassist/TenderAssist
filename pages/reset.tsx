@@ -11,14 +11,6 @@ const ResetPage: NextPage = () => {
   const [feedbackBoxes, setfeedbackBoxes] = useState('');
   const [feedbackSpecials, setfeedbackSpecials] = useState('');
   
-  //Enter Button---------------------------------------
-  const [value, setValue] = useState('');
-
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.keyCode === 13) {
-      AddOffice();
-    }
-  };
   //Reset Offices---------------------------------------------------
   async function ResetOffices() {
     setfeedbackOffice('Loading...');
