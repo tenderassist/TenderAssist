@@ -31,11 +31,23 @@ const AdminHome: NextPage = () => {
               <div data-name='a'>Add Offices</div>
             </li>
           </Link>
+          
+          <Link href={'deleteoffices'}>
+           <li>
+            <div data-name='a'>Delete Offices</div>
+          </li>
+          </Link>
 
           <Link href={'updateoffices'}>
             <li>
               <div data-name='a'>Update Offices</div>
             </li>
+          </Link>
+          
+          <Link href={'reset'}>
+          <li>
+            <div data-name='a'>Reset</div>
+          </li>
           </Link>
 
           <Link href={'user_home'}>
@@ -54,13 +66,19 @@ const AdminHome: NextPage = () => {
       <p>The Add Boxes/Specials page allows you to add the different box and special numbers to the database so that they can be used when capturing offices returning or viewing them.</p>
 
       <h3>Delete Boxes/Specials</h3>
-      <p>The Delete Boxes/Specials page allows you to delete boxes and specials from the database that are no longer in use, to ensure that more accurate data will be captured by the temp workers.</p>
+      <p>The Delete Boxes/Specials page allows you to delete boxes and specials from the database that are no longer in use, to ensure that more accurate data will be captured.</p>
 
       <h3>Add Offices</h3>
       <p>This page allows you to add office numbers to the database so that they can be used when recording where the boxes/specials go to or return from.</p>
       
+      <h3>Delete Offices</h3>
+      <p>The Delete Offices page allows you to delete offices from the database that are no longer in use, to ensure more accurate data will be captured</p>
+      
       <h3>Update Offices</h3>
       <p>The Upade Offices page allows you to update the company name occupying the respective office in order to ensure better feedback when searching offices.</p>
+      
+      <h3>Reset</h3>
+      <p>The Reset page completely resets the information in the database. This should be done before switching to the user mode to ensure that outdated information is not used</p>
     </div>
   );
 };

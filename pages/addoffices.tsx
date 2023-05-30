@@ -69,11 +69,23 @@ const AddOfficePage: NextPage = () => {
           <li>
             <div data-name='a' className='active'>Add Offices</div>
           </li>
+          
+          <Link href={'deleteoffices'}>
+           <li>
+            <div data-name='a'>Delete Offices</div>
+          </li>
+          </Link>
 
           <Link href={'updateoffices'}>
             <li>
               <div data-name='a'>Update Offices</div>
             </li>
+          </Link>
+          
+          <Link href={'reset'}>
+          <li>
+            <div data-name='a'>Reset</div>
+          </li>
           </Link>
 
           <Link href={'user_home'}>
