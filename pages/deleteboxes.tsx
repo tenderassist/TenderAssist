@@ -8,6 +8,8 @@ pb.autoCancellation(false);
 
 const DeleteBoxesPage: NextPage = () => {
   const [feedback, setfeedback] = useState('');
+  const [feedbackBoxes, setfeedbackBoxes] = useState('');
+  const [feedbackSpecials, setfeedbackSpecials] = useState('');
   const [typechosen, settypechosen] = useState('');
   const [delnumberbox, setdelnumberbox] = useState('');
   
@@ -28,9 +30,41 @@ const DeleteBoxesPage: NextPage = () => {
     setdelnumberbox(event.target.value);
   };
   //---------------------------------------------------
+  async function DisplayBoxes(){
+    setfeedbackBoxes('Loading...')
+    
+    try{
+    const boxRecords = await pb.collection('boxes').getFullList({
+    sort: 'boxnum',
+  });
+
+    const boxString = boxRecords.map((entry) => entry.boxnum).join(', ');
+    setfeedbackBoxes(boxString);
+    
+    }catch(error){
+      window.alert('ERROR: Unable to fetch boxes!');
+      setfeedbackBoxes('')
+    }
+  }
+  //---------------------------------------------------
+  async function DisplaySpecials(){
+    setfeedbackSpecials('Loading...')
+    
+    try{
+    const specialRecords = await pb.collection('specials').getFullList({
+    sort: 'specialnum',
+  });
+
+    const specialString = specialRecords.map((entry) => entry.specialnum).join(', ');
+    setfeedbackSpecials(specialString);
+    
+    }catch(error){
+      window.alert('ERROR: Unable to fetch specials!');
+      setfeedbackSpecials('')
+    }
+  }
+  //---------------------------------------------------
   async function DeleteBoxSpec() {
-    console.log(delnumberbox);
-    console.log(typechosen);
 
     let confirm = window.confirm('The box/special will be permanently deleted');
     if (confirm) {
@@ -74,6 +108,8 @@ const DeleteBoxesPage: NextPage = () => {
       }
     settypechosen('');
     setdelnumberbox('');
+    setfeedbackBoxes('');
+    setfeedbackSpecials('');
     }
     
   }
@@ -106,11 +142,23 @@ const DeleteBoxesPage: NextPage = () => {
               <div data-name='a'>Add Offices</div>
             </li>
           </Link>
+          
+          <Link href={'deleteoffices'}>
+           <li>
+            <div data-name='a'>Delete Offices</div>
+          </li>
+          </Link>
 
           <Link href={'updateoffices'}>
             <li>
               <div data-name='a'>Update Offices</div>
             </li>
+          </Link>
+          
+          <Link href={'reset'}>
+          <li>
+            <div data-name='a'>Reset</div>
+          </li>
           </Link>
 
           <Link href={'user_home'}>
@@ -126,8 +174,18 @@ const DeleteBoxesPage: NextPage = () => {
         <p>
           Please select the box/special you&apos;d like to delete below.
         </p>
+        <button onClick={DisplayBoxes}>
+          Display Boxes
+        </button>
+        <p>{feedbackBoxes}</p>
+        
+        <button onClick={DisplaySpecials}>
+          Display Specials
+        </button>
+        <p>{feedbackSpecials}</p>
+
         <br />
-        <label>Type: </label>
+        <label>Delete Type: </label>
         <select value={typechosen} onChange={handleInputtypechosen}>
           <option value=''>Select Type</option>
           <option value='deletebox'>Box</option>
@@ -135,7 +193,7 @@ const DeleteBoxesPage: NextPage = () => {
         </select>
         <br />
 
-        <label>Box/Special Number: </label>
+        <label>Delete Box/Special Number: </label>
         <input
           placeholder='E.g. 21'
           value={delnumberbox}
@@ -152,4 +210,5 @@ const DeleteBoxesPage: NextPage = () => {
     </div>
   );
 };
+
 export default DeleteBoxesPage;

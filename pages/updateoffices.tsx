@@ -89,10 +89,22 @@ const UpdateOfficePage: NextPage = () => {
               <div data-name='a'>Add Offices</div>
             </li>
           </Link>
+          
+          <Link href={'deleteoffices'}>
+           <li>
+            <div data-name='a'>Delete Offices</div>
+          </li>
+          </Link>
 
           <li>
             <div data-name='a' className='active'>Update Offices</div>
           </li>
+          
+          <Link href={'reset'}>
+          <li>
+            <div data-name='a'>Reset</div>
+          </li>
+          </Link>
 
           <Link href={'user_home'}>
             <li>

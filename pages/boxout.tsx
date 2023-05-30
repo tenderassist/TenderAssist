@@ -54,7 +54,7 @@ const BoxOutPage: NextPage = () => {
   };
   //---------------------------------------------------
   async function BoxCheckOut() {
-    setfeedback('Loading...');
+    setfeedback('Loading');
 
     const nodate = new Date();
     const dateout = nodate.getTime();
@@ -63,11 +63,12 @@ const BoxOutPage: NextPage = () => {
     const offout = 'officenum= ' + boxoutoffidval;
 
  try{
+   setfeedback('Loading.');
     var offrecord = await pb.collection('offices').getFirstListItem(offout);
     const officerecordid = offrecord.id;
     const officeIDData = boxoutoffidval;
     const offboxspecdata = offrecord.offboxspecchecked;
-    var offb1 = offrecord.offbox1;
+    {/*var offb1 = offrecord.offbox1;
     var offb2 = offrecord.offbox2;
     var offb3 = offrecord.offbox3;
     var offb4 = offrecord.offbox4;
@@ -190,78 +191,52 @@ const BoxOutPage: NextPage = () => {
     offrecord = await pb.collection('offices').getFirstListItem(offout);
     offs1 = offrecord.offspec1;
     offs2 = offrecord.offspec2;
-    offs3 = offrecord.offspec3;
+    offs3 = offrecord.offspec3;*/}
 
     // BOXES ----------------------------------------------------------
-    if (boxout1val != '') {
-      const box1 = 'boxnum= ' + boxout1val;
-      const box1record = await pb.collection('boxes').getFirstListItem(box1);
-      const boxID1Data = box1record.id;
+    setfeedback('Loading..');
+     const updateBoxes = async (boxVal) => {
+    if (boxVal) {
+      const boxNum = 'boxnum= ' + boxVal;
+      const boxRecord = await pb.collection('boxes').getFirstListItem(boxNum);
+      const boxIDData = boxRecord.id;
 
-      await pb.collection('boxes').update(boxID1Data, {
+      await pb.collection('boxes').update(boxIDData, {
         boxlastcheckout: dateout,
         boxlastoutdisplay: outdisplay,
         boxlastoffice: officeIDData,
         boxtemplastcheckout: tempIDData,
       });
     }
-    //----------------------------------------------------------
-    if (boxout2val != '') {
-      const box2 = 'boxnum= ' + boxout2val;
-      const box2record = await pb.collection('boxes').getFirstListItem(box2);
-      const boxID2Data = box2record.id;
+  };
 
-      await pb.collection('boxes').update(boxID2Data, {
-        boxlastcheckout: dateout,
-        boxlastoutdisplay: outdisplay,
-        boxlastoffice: officeIDData,
-        boxtemplastcheckout: tempIDData,
-      });
-    }
-    //----------------------------------------------------------
-    if (boxout3val != '') {
-      const box3 = 'boxnum= ' + boxout3val;
-      const box3record = await pb.collection('boxes').getFirstListItem(box3);
-      const boxID3Data = box3record.id;
-
-     await pb.collection('boxes').update(boxID3Data, {
-        boxlastcheckout: dateout,
-        boxlastoutdisplay: outdisplay,
-        boxlastoffice: officeIDData,
-        boxtemplastcheckout: tempIDData,
-      });
-    }
+  await Promise.all([
+    updateBoxes(boxout1val),
+    updateBoxes(boxout2val),
+    updateBoxes(boxout3val),
+  ]);
 
     // SPECIALS ----------------------------------------------------------
-    if (specialout1val != '') {
-      const spec1 = 'specialnum= ' + specialout1val;
-      const spec1record = await pb
-        .collection('specials')
-        .getFirstListItem(spec1);
-      const specID1Data = spec1record.id;
+    setfeedback('Loading...');
+     const updateSpecials = async (specVal) => {
+    if (specVal) {
+      const specNum = 'specialnum= ' + specVal;
+      const specRecord = await pb.collection('specials').getFirstListItem(specNum);
+      const specIDData = specRecord.id;
 
-     await pb.collection('specials').update(specID1Data, {
+      await pb.collection('specials').update(specIDData, {
         speciallastcheckout: dateout,
         speciallastoutdisplay: outdisplay,
         speciallastoffice: officeIDData,
         specialtemplastcheckout: tempIDData,
       });
     }
-    //----------------------------------------------------------
-    if (specialout2val != '') {
-      const spec2 = 'specialnum= ' + specialout2val;
-      const spec2record = await pb
-        .collection('specials')
-        .getFirstListItem(spec2);
-      const specID2Data = spec2record.id;
+  };
 
-     await pb.collection('specials').update(specID2Data, {
-        speciallastcheckout: dateout,
-        speciallastoutdisplay: outdisplay,
-        speciallastoffice: officeIDData,
-        specialtemplastcheckout: tempIDData,
-      });
-    }
+  await Promise.all([
+    updateSpecials(specialout1val),
+    updateSpecials(specialout2val),
+  ]);
     //----------------------------------------------------------
 
     const offboxes =
@@ -344,11 +319,11 @@ const BoxOutPage: NextPage = () => {
             </li>
           </Link>
 
-          <Link href={'searchoffice'}>
+          {/*<Link href={'searchoffice'}>
             <li>
               <div data-name='a'>Office Search</div>
             </li>
-          </Link>
+          </Link>*/}
 
           <Link href={'summary'}>
             <li>

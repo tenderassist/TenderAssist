@@ -39,7 +39,8 @@ const SearchBoxPage: NextPage = () => {
       const boxrecord = await pb
         .collection('boxes')
         .getFirstListItem(boxsearchnum);
-
+        
+        setfeedback('Loading...');
       const boxOffData = boxrecord.boxlastoffice;
       const boxOutData = boxrecord.boxlastoutdisplay;
       const boxInData = boxrecord.boxlastindisplay;
@@ -131,11 +132,11 @@ const SearchBoxPage: NextPage = () => {
             <div data-name='a' className='active'>Search Boxes/Specials</div>
           </li>
 
-          <Link href={'searchoffice'}>
+          {/*<Link href={'searchoffice'}>
             <li>
               <div data-name='a'>Office Search</div>
             </li>
-          </Link>
+          </Link>*/}
 
           <Link href={'summary'}>
             <li>
